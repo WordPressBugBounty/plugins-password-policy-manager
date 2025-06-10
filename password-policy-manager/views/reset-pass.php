@@ -44,7 +44,7 @@ function moppm_generate_id() {
 function moppm_reset_pass_form( $user ) {
 	$session_id = moppm_generate_id();
 	$user_id    = $user->ID;
-	set_transient( $session_id, $user_id, 90 );
+	set_transient( $session_id, array( 'moppm_user_id' => $user_id ), 90 );
 	$miniorange_logo = plugins_url( 'password-policy-manager' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'shield.png' );
 	?>
 	<html>

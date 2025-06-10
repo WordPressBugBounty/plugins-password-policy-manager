@@ -6,7 +6,7 @@ Donate link: https://miniorange.com
 Requires at least: 4.6
 Tested up to: 6.8
 Requires PHP: 5.3.0
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: Expat
 License URI: https://plugins.miniorange.com/mit-license
 
@@ -179,6 +179,10 @@ For any customization related queries or if you require any assistance, email us
 2. Check for password strength
 
 == Changelog ==
+
+= 2.0.5 =
+
+* Vulnerability Fixes
 
 = 2.0.4 =
 

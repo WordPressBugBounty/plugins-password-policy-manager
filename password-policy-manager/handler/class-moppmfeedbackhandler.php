@@ -35,8 +35,8 @@ if ( ! class_exists( 'MOPPMFeedbackHandler' ) ) {
 			}
 			$user_id         = isset( $_POST['mopppm_userid'] ) ? sanitize_text_field( wp_unslash( $_POST['mopppm_userid'] ) ) : '';
 			$session_id      = isset( $_POST['moppm_session_id'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_session_id'] ) ) : '';
-			$current_user_id = get_transient( $session_id );
-			if( $user_id !== $current_user_id ){
+			$user_data       = get_transient( $session_id );
+			if( empty( $user_data ) || empty( $user_id ) || (int) $user_id !== (int) $user_data['moppm_user_id'] ) {
 				return;
 			}
 			$currentuser = get_user_by( 'id', $user_id );
