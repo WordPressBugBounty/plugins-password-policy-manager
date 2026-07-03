@@ -27,12 +27,6 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 * @return void
 		 */
 		public function moppm_ajax_fun() {
-			if ( isset( $_POST['moppm_user_password'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is used in each functions separately
-				$username = isset( $_POST['moppm_user_name'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_user_name'] ) ) : '';//phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is used in each functions separately
-				$password = $_POST['moppm_user_password']; //phpcs:ignore WordPress.Security.NonceVerification.Missing , WordPress.Security.ValidatedSanitizedInput.MissingUnslash , WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nonce is used in each functions separately and do not sanitize or unsplash password
-				do_action( 'authenticate', null, $username, $password );
-
-			}
 			add_action( 'wp_ajax_moppm_ajax', array( $this, 'moppm_ajax' ) );
 			add_action( 'wp_ajax_moppm_login', array( $this, 'moppm_login' ) );
 			add_action( 'wp_ajax_nopriv_moppm_login', array( $this, 'moppm_login' ) );
@@ -48,8 +42,8 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 			if ( ! check_ajax_referer( 'moppm-admin-action-nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 				wp_send_json( 'ERROR' );
 			}
-			if ( isset( $_POST['option'] ) ) { 
-				$option = sanitize_text_field( wp_unslash( $_POST['option'] ) ); 
+			if ( isset( $_POST['option'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified via check_ajax_referer() above.
+				$option = sanitize_text_field( wp_unslash( $_POST['option'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified via check_ajax_referer() above.
 				switch ( $option ) {
 					case 'moppm_setting_enable_disable':
 						$this->moppm_setting_enable_disable();
@@ -124,11 +118,10 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 * @return void
 		 */
 		public function moppm_update_plan() {
-			$moppm_all_plannames = isset( $_POST['planname'] ) ? sanitize_text_field( wp_unslash( $_POST['planname'] ) ) : '';
-			$moppm_plan_type     = isset( $_POST['plantype'] ) ? sanitize_text_field( wp_unslash( $_POST['plantype'] ) ) : '';
+			$moppm_all_plannames = isset( $_POST['planname'] ) ? sanitize_text_field( wp_unslash( $_POST['planname'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_plan_type     = isset( $_POST['plantype'] ) ? sanitize_text_field( wp_unslash( $_POST['plantype'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
 			update_site_option( 'moppm_planname', $moppm_all_plannames );
 			update_site_option( 'moppm_plantype', $moppm_plan_type );
-
 		}
 
 		/**
@@ -137,14 +130,13 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 * @return void
 		 */
 		public function moppm_enable_disable_report() {
-			$moppm_enable_disable_ppm = isset( $_POST['moppm_enable_disable_report'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_enable_disable_report'] ) ) : '';
+			$moppm_enable_disable_ppm = isset( $_POST['moppm_enable_disable_report'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_enable_disable_report'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
 			update_site_option( 'moppm_enable_disable_report', $moppm_enable_disable_ppm );
 			if ( 'on' === $moppm_enable_disable_ppm ) {
 				wp_send_json( 'SUCCESS' );
 			} elseif ( '' === $moppm_enable_disable_ppm ) {
 				wp_send_json( 'ERROR' );
 			}
-
 		}
 
 		/**
@@ -164,8 +156,8 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 */
 		public function moppm_report_remove() {
 			global $moppm_db_queries;
-			if ( isset( $_POST['user_value'] ) ) {
-				$user_id = sanitize_text_field( wp_unslash( $_POST['user_value'] ) );
+			if ( isset( $_POST['user_value'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+				$user_id = sanitize_text_field( wp_unslash( $_POST['user_value'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
 				$moppm_db_queries->delete_report_list( $user_id );
 				wp_send_json( 'SUCCESS' );
 			}
@@ -200,7 +192,6 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 				}
 			}
 			wp_send_json( 'SUCCESS' );
-
 		}
 
 		/**
@@ -209,8 +200,8 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 * @return void
 		 */
 		public function moppm_setting_enable_disable() {
-			if ( isset( $_POST['moppm_enable_ppm'] ) ) {
-				$moppm_enable_disable_ppm = sanitize_text_field( wp_unslash( $_POST['moppm_enable_ppm'] ) );
+			if ( isset( $_POST['moppm_enable_ppm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+				$moppm_enable_disable_ppm = sanitize_text_field( wp_unslash( $_POST['moppm_enable_ppm'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
 				update_site_option( 'Moppm_enable_disable_ppm', $moppm_enable_disable_ppm );
 			} else {
 				$moppm_enable_disable_ppm = '';
@@ -229,12 +220,12 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 * @return void
 		 */
 		public function moppm_setting_enable_disable_form() {
-			$moppm_numeric_digit         = isset( $_POST['moppm_numeric_digit'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_numeric_digit'] ) ) : '';
-			$moppm_enable_disable_expiry = isset( $_POST['moppm_enable_disable_expiry'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_enable_disable_expiry'] ) ) : '';
-			$moppm_letter                = isset( $_POST['moppm_letter'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_letter'] ) ) : '';
-			$moppm_first_reset           = isset( $_POST['moppm_first_reset'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_first_reset'] ) ) : '';
-			$moppm_digit                 = isset( $_POST['moppm_digit'] ) ? intval( sanitize_text_field( wp_unslash( $_POST['moppm_digit'] ) ) ) : '';
-			$moppm_special_char          = isset( $_POST['moppm_special_char'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_special_char'] ) ) : '';
+			$moppm_numeric_digit         = isset( $_POST['moppm_numeric_digit'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_numeric_digit'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_enable_disable_expiry = isset( $_POST['moppm_enable_disable_expiry'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_enable_disable_expiry'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_letter                = isset( $_POST['moppm_letter'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_letter'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_first_reset           = isset( $_POST['moppm_first_reset'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_first_reset'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_digit                 = isset( $_POST['moppm_digit'] ) ? intval( sanitize_text_field( wp_unslash( $_POST['moppm_digit'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
+			$moppm_special_char          = isset( $_POST['moppm_special_char'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_special_char'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in moppm_ajax() before dispatch.
 			'true' === $moppm_letter ? update_site_option( 'moppm_letter', 1 ) : update_site_option( 'moppm_letter', 0 );
 			'true' === $moppm_first_reset ? update_site_option( 'moppm_first_reset', 1 ) : update_site_option( 'moppm_first_reset', 0 );
 			'true' === $moppm_numeric_digit ? update_site_option( 'moppm_Numeric_digit', 1 ) : update_site_option( 'moppm_Numeric_digit', 0 );
@@ -255,13 +246,14 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 		 */
 		public function moppm_submit_new_pass() {
 			global $moppm_db_queries;
-			$nonce = isset( $_POST['nonce'] ) ? sanitize_key( $_POST['nonce'] ) : '';
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce value read here; verified immediately below.
+			$nonce = isset( $_POST['nonce'] ) ? sanitize_key( wp_unslash( $_POST['nonce'] ) ) : '';
 			if ( ! wp_verify_nonce( $nonce, 'moppmresetformnonce' ) ) {
 				wp_send_json_error( MOPPM_Messages::SOMETHING_WENT_WRONG );
 			}
-			$session_id = isset( $_POST['session_id'] ) ? sanitize_text_field( wp_unslash( $_POST['session_id'] ) ) : '';
-			if ( isset( $_POST['moppm_save_pass'] ) ) {
-				$moppm_submit_new_pass = sanitize_text_field( wp_unslash( $_POST['moppm_save_pass'] ) );
+			$session_id = isset( $_POST['session_id'] ) ? sanitize_text_field( wp_unslash( $_POST['session_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified via wp_verify_nonce() above.
+			if ( isset( $_POST['moppm_save_pass'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified via wp_verify_nonce() above.
+				$moppm_submit_new_pass = sanitize_text_field( wp_unslash( $_POST['moppm_save_pass'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified via wp_verify_nonce() above.
 				update_site_option( 'moppm_save_pass', $moppm_submit_new_pass );
 			}
 			$newpass  = isset( $_POST['newpass'] ) ? $_POST['newpass'] : '';//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash ,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- do not sanitize and unslash password.
@@ -303,10 +295,12 @@ if ( ! class_exists( 'MOPPM_Ajax' ) ) {
 				$info['user_login']    = $user_name;
 				$info['user_password'] = $newpass;
 				$info['remember']      = true;
-				$response = array( 'message' => MOPPM_Messages::PASSWORD_SAVED, 'user_id' => $user_id );
-				wp_send_json_success($response);
+				$response              = array(
+					'message' => MOPPM_Messages::PASSWORD_SAVED,
+					'user_id' => $user_id,
+				);
+				wp_send_json_success( $response );
 			}
-		
 		}
 	}
 }

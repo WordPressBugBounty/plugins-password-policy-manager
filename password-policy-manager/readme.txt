@@ -2,12 +2,12 @@
 
 
 Contributors: miniOrange
-Tags:  Reset Password, Password Security, Strong password, Secure Password, Password strength, password score, force password change, Users password manager, Generate Random  Passwords, One Click password reset, password audit report, Enforce strong password
+Tags:  Reset Password, Password Security, Strong password, Secure Password, Password strength
 Donate link: https://miniorange.com
 Requires at least: 4.6
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 5.3.0
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: Expat
 License URI: https://plugins.miniorange.com/mit-license
 
@@ -156,6 +156,12 @@ If a user hasn't logged in yet, they will be prompted to change their password d
 
 
 == Changelog ==
+
+= 2.0.7 =
+
+* Security fixes
+* Performance optimization
+* Compatibility with WordPress 7.0
 
 = 2.0.6 =
 

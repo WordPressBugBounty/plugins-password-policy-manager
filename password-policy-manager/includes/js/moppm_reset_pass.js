@@ -119,23 +119,36 @@ jQuery("#moppm_save_pass").click(function(e){
 						});
 				
 			}
-function Moppm_error_msg(error) 
-{
-	jQuery('#moppm_message').empty();
-	var msg = "<div id='notice_div' class='moppm_overlay_error'><div class='popup_text' style='margin-left:10px'>" + error + "</div></div>";
-	jQuery('#moppm_message').append(msg);
+function moppm_notice_plain_text( raw ) {
+	if ( typeof raw === 'object' && raw !== null && typeof raw.message === 'string' ) {
+		return raw.message;
+	}
+	if ( raw === null || raw === undefined || typeof raw === 'object' ) {
+		return '';
+	}
+	return String( raw );
+}
+
+function Moppm_error_msg( error ) {
+	jQuery( '#moppm_message' ).empty();
+	var text = moppm_notice_plain_text( error );
+	var $notice = jQuery( '<div/>', { id: 'notice_div', class: 'moppm_overlay_error' } );
+	jQuery( '<div/>', { class: 'popup_text', css: { marginLeft: '10px' } } ).text( text ).appendTo( $notice );
+	jQuery( '#moppm_message' ).append( $notice );
 	window.onload = Moppm_nav_popup();
 }
 
-function Moppm_nav_popup() 
+function Moppm_nav_popup()
 {
   document.getElementById("notice_div").style.width = "40%";
   setTimeout(function(){ jQuery('#notice_div').fadeOut('slow'); }, 30000);
-}			
-function Moppm_success_msg(success) {
-	jQuery('#moppm_message').empty();
-	var msg = "<div id='notice_div' class='moppm_overlay_success'><div class='popup_text'style='margin-left:10px'>"+success+"</div></div>";
-	jQuery('#moppm_message').append(msg);
+}
+function Moppm_success_msg( success ) {
+	jQuery( '#moppm_message' ).empty();
+	var text = moppm_notice_plain_text( success );
+	var $notice = jQuery( '<div/>', { id: 'notice_div', class: 'moppm_overlay_success' } );
+	jQuery( '<div/>', { class: 'popup_text', css: { marginLeft: '10px' } } ).text( text ).appendTo( $notice );
+	jQuery( '#moppm_message' ).append( $notice );
 	window.onload = Moppm_nav_popup();
 }
 

@@ -55,9 +55,9 @@ function moppm_reset_pass_form( $user ) {
 		<?php
 		wp_enqueue_script( 'moppm_resest_pass_jquery_script', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'bootstrap.min.js', __FILE__ ), array( 'jquery' ), MOPPM_VERSION, true );
 		wp_print_scripts( 'jquery-core' );
-		wp_register_style( 'custom-login-css2', plugins_url( 'includes/css/bootstrap2.min.css', dirname( __FILE__ ) ), array(), MOPPM_VERSION );
+		wp_register_style( 'custom-login-css2', plugins_url( 'includes/css/bootstrap2.min.css', __DIR__ ), array(), MOPPM_VERSION );
 		wp_print_styles( 'custom-login-css2' );
-		wp_register_style( 'custom-login', plugins_url( 'includes/css/moppm_style_settings.min.css', dirname( __FILE__ ) ), array(), MOPPM_VERSION );
+		wp_register_style( 'custom-login', plugins_url( 'includes/css/moppm_style_settings.css', __DIR__ ), array(), MOPPM_VERSION );
 		wp_print_styles( 'custom-login' );
 		?>
 	</head>
@@ -68,27 +68,27 @@ function moppm_reset_pass_form( $user ) {
 				<div class="col-12 col-md-8 col-xxl-5 ">
 					<div class="moppm_reset_body py-3 px-2">
 						<center><?php echo '<img style="width:150px; height:90px;display: inline;"src="' . esc_url_raw( $miniorange_logo ) . '">'; ?></center>
-						<h2 class="text-center my-3 text-capitalize" style="color:black; margin-left:15px; font-size:35px;"> <span><?php esc_html_e( 'Reset Password', 'password-policy-manager' ); ?></span> </h2>
+						<h2 class="text-center text-capitalize" style="color:black; margin-left:15px; font-size:35px;"> <span><?php esc_html_e( 'Reset Password', 'password-policy-manager' ); ?></span> </h2>
 						<div class="row mx-auto">
 							<div class=" col-6 mx-auto">
 								<form class="moppm_my_form">
-									<div class="mb-3">
+									<div>
 										<label for="Current Password" class="moppm_form_label"><?php esc_html_e( 'Current Password', 'password-policy-manager' ); ?></label>
 										<input type="Password" class="moppm_input_password_field" id="moppm_old_pass" name="OldPass" placeholder="<?php esc_attr_e( 'Current Password', 'password-policy-manager' ); ?>">
 									</div>
-									<div class="mb-3">
+									<div>
 										<label for="New Password" class="moppm_form_label moppm_form_value"><?php esc_html_e( 'New Password', 'password-policy-manager' ); ?></label>
 										<input type="Password" class="moppm_input_password_field" id="moppm_new_pass1" name="Newpass" placeholder="<?php esc_attr_e( 'New Password', 'password-policy-manager' ); ?>">
 									</div>
-									<div class="mb-3">
+									<div>
 										<label for="Confirm Password" class="moppm_form_label moppm_form_value"><?php esc_html_e( 'Confirm Password', 'password-policy-manager' ); ?></label>
 										<input type="Password" class="moppm_input_password_field" id="moppm_new_pass2" name="Newpass2" placeholder="<?php esc_attr_e( 'Confirm Password', 'password-policy-manager' ); ?>">
 										<input type="checkbox" onclick="moppm_myFunction()"><label style="margin-left:5%;"><?php esc_html_e( 'Show Password', 'password-policy-manager' ); ?></label>
 									</div>
 
-									<div class="my-3">
+									<div>
 									<button class="btn btn-block btn-primary btn-md" type="button" value="SUBMIT" id="moppm_save_pass" >
-									<span class="moppm_button_name"> <?php esc_html_e('Change Password','password-policy-manager'); ?></span> 
+									<span class="moppm_button_name"> <?php esc_html_e( 'Change Password', 'password-policy-manager' ); ?></span> 
 									<span class="moppm_loader"></span> 
 										</button> 
 									</div>
@@ -149,7 +149,7 @@ function moppm_reset_pass_form( $user ) {
 		</form>   
 		<div id="moppm_message"></div>
 		<?php
-		wp_register_script( 'moppm_ajax-login-script', plugins_url( 'includes/js/moppm_reset_pass.min.js', dirname( __FILE__ ) ), array(), MOPPM_VERSION, true );
+		wp_register_script( 'moppm_ajax-login-script', plugins_url( 'includes/js/moppm_reset_pass.js', __DIR__ ), array(), MOPPM_VERSION, true );
 		wp_localize_script(
 			'moppm_ajax-login-script',
 			'ajax_object',

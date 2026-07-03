@@ -14,7 +14,6 @@ if ( ! class_exists( 'MOPPMFeedbackHandler' ) ) {
 	 * Class to handle user feedback
 	 */
 	class MOPPMFeedbackHandler {
-		
 		/**
 		 * Construct function.
 		 */
@@ -23,28 +22,29 @@ if ( ! class_exists( 'MOPPMFeedbackHandler' ) ) {
 			add_action( 'init', array( $this, 'moppm_pass2login_redirect' ) );
 		}
 
-        /**
+	    /**
 		 * Logs in the users.
 		 *
 		 * @return void
 		 */
-		public function moppm_pass2login_redirect(){
+		public function moppm_pass2login_redirect() {
 			$nonce = isset( $_POST['moppm_login_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_login_nonce'] ) ) : null;
 			if ( ! wp_verify_nonce( $nonce, 'moppm-login-nonce' ) ) {
 				return;
 			}
-			$user_id         = isset( $_POST['mopppm_userid'] ) ? sanitize_text_field( wp_unslash( $_POST['mopppm_userid'] ) ) : '';
-			$session_id      = isset( $_POST['moppm_session_id'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_session_id'] ) ) : '';
-			$user_data       = get_transient( $session_id );
-			if( empty( $user_data ) || empty( $user_id ) || (int) $user_id !== (int) $user_data['moppm_user_id'] ) {
+			$user_id    = isset( $_POST['mopppm_userid'] ) ? sanitize_text_field( wp_unslash( $_POST['mopppm_userid'] ) ) : '';
+			$session_id = isset( $_POST['moppm_session_id'] ) ? sanitize_text_field( wp_unslash( $_POST['moppm_session_id'] ) ) : '';
+			$user_data  = get_transient( $session_id );
+			if ( empty( $user_data ) || empty( $user_id ) || (int) $user_id !== (int) $user_data['moppm_user_id'] ) {
 				return;
 			}
 			$currentuser = get_user_by( 'id', $user_id );
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Legacy action name; third parties may use this hook.
 			do_action( 'miniorange_post_authenticate_user_login', $currentuser, '', null );
 			wp_set_current_user( $user_id, $currentuser->user_login );
 			delete_expired_transients( true );
 			wp_set_auth_cookie( $user_id, true );
-			wp_safe_redirect( home_url());
+			wp_safe_redirect( home_url() );
 			exit;
 		}
 		/**
@@ -73,7 +73,7 @@ if ( ! class_exists( 'MOPPMFeedbackHandler' ) ) {
 		public function handle_feedback() {
 
 			if ( MOPPM_TEST_MODE ) {
-				deactivate_plugins( dirname( dirname( __FILE__ ) ) . '\\miniorange-password-policy-setting.php' );
+				deactivate_plugins( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'miniorange-password-policy-setting.php' );
 				return;
 			}
 			$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_key( $_POST['_wpnonce'] ) : '';
@@ -136,13 +136,12 @@ if ( ! class_exists( 'MOPPMFeedbackHandler' ) ) {
 				if ( json_last_error() === JSON_ERROR_NONE ) {
 					if ( is_array( $submited ) && array_key_exists( 'status', $submited ) && 'ERROR' === $submited['status'] ) {
 						do_action( 'moppm_show_message', $submited['message'], 'ERROR' );
-					} else {
-						if ( false === $submited ) {
-							do_action( 'moppm_show_message', 'Error while submitting the query.', 'ERROR' );
-						}
+					} elseif ( false === $submited ) {
+						do_action( 'moppm_show_message', 'Error while submitting the query.', 'ERROR' );
 					}
 				}
-					deactivate_plugins( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'miniorange-password-policy-setting.php' );
+					deactivate_plugins( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'miniorange-password-policy-setting.php' );
+					remove_menu_page( 'moppm' );
 					do_action( 'moppm_show_message', 'Thank you for the feedback.', 'SUCCESS' );
 			}
 		}

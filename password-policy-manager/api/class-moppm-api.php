@@ -184,7 +184,6 @@ if ( ! class_exists( 'MOPPM_Api' ) ) {
 		 * @return string
 		 */
 		public static function send_email_alert( $email, $message, $feedback_option ) {
-			global $user;
 			$company   = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) ) : '';
 			$url       = MOPPM_Constants::HOST_NAME . '/moas/api/notify/send';
 			$user_key  = MOPPM_Constants::DEFAULT_CUSTOMER_KEY;
@@ -195,10 +194,10 @@ if ( ! class_exists( 'MOPPM_Api' ) ) {
 			} elseif ( 'moppm_feedback' === $feedback_option ) {
 				$subject = 'Feedback: miniOrange password policy setting - ' . sanitize_email( $email );
 			}
-			$user    = wp_get_current_user();
-			$query   = '[miniOrange password policy setting: - V ' . MOPPM_VERSION . ']: ' . $message;
-			$content = '<div >Hello, <br><br>First Name :' . sanitize_text_field( $user->user_firstname ) . '<br><br>Last  Name :' . sanitize_text_field( $user->user_lastname ) . '   <br><br>Company :<a href="' . $company . '" target="_blank" >' . $company . '</a><br><br>Email :<a href="mailto:' . sanitize_email( $email ) . '" target="_blank">' . sanitize_email( $email ) . '</a><br><br>Query :' . $query . '</div>';
-			$fields  = array(
+			$moppm_wp_user = wp_get_current_user();
+			$query         = '[miniOrange password policy setting: - V ' . MOPPM_VERSION . ']: ' . $message;
+			$content       = '<div >Hello, <br><br>First Name :' . sanitize_text_field( $moppm_wp_user->user_firstname ) . '<br><br>Last  Name :' . sanitize_text_field( $moppm_wp_user->user_lastname ) . '   <br><br>Company :<a href="' . $company . '" target="_blank" >' . $company . '</a><br><br>Email :<a href="mailto:' . sanitize_email( $email ) . '" target="_blank">' . sanitize_email( $email ) . '</a><br><br>Query :' . $query . '</div>';
+			$fields        = array(
 				'customerKey' => $user_key,
 				'sendEmail'   => true,
 				'email'       => array(

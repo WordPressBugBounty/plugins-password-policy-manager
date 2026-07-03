@@ -8,7 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$back_button = admin_url() . 'admin.php?page=moppm';
+$moppm_back_button = admin_url() . 'admin.php?page=moppm';
 echo '
             <div>
                 <h4>Thank You for registering with miniOrange.</h4>
@@ -16,26 +16,26 @@ echo '
                 <table border="1" style="background-color:#FFFFFF; border:1px solid #CCCCCC; border-collapse: collapse; padding:0px 0px 0px 10px; margin:2px; width:85%">
                     <tr>
                         <td style="width:45%; padding: 10px;">Username/Email</td>
-                        <td style="width:55%; padding: 10px;">' . esc_html( $email ) . '</td>
+                        <td style="width:55%; padding: 10px;">' . esc_html( $moppm_profile_email ) . '</td>
                     </tr>
                     <tr>
                         <td style="width:45%; padding: 10px;">User ID</td>
-                        <td style="width:55%; padding: 10px;">' . esc_html( $key ) . '</td>
+                        <td style="width:55%; padding: 10px;">' . esc_html( $moppm_profile_customer_key ) . '</td>
                     </tr>
                     <tr>
                         <td style="width:45%; padding: 10px;">API Key</td>
-                        <td style="width:55%; padding: 10px;">' . esc_html( $api ) . '</td>
+                        <td style="width:55%; padding: 10px;">' . esc_html( $moppm_profile_api_key ) . '</td>
                     </tr>
                     <tr>
                         <td style="width:45%; padding: 10px;">Token Key</td>
-                        <td style="width:55%; padding: 10px;">' . esc_html( $token ) . '</td>
+                        <td style="width:55%; padding: 10px;">' . esc_html( $moppm_profile_token ) . '</td>
                     </tr>
                 </table>
                 <br/>
                  <center>';
-if ( isset( $back_button ) ) {
+if ( isset( $moppm_back_button ) ) {
 
-		echo '<a class="button button-secondary" href="' . esc_url( $back_button ) . '">Back</a> ';
+		echo '<a class="button button-secondary" href="' . esc_url( $moppm_back_button ) . '">Back</a> ';
 }
 				echo '
                 <a id="moppm_log_out" class="button button-primary">Remove Account</a>

@@ -19,7 +19,7 @@ echo '<!--Register with miniOrange-->
 						<td><b><font color="#FF0000">*</font>Email:</b></td>
 						<td><input class="moppm_table_input_text" type="email" name="email"
 							required placeholder="person@example.com"
-							value="' . esc_attr( $user->user_email ) . '" /></td>
+							value="' . esc_attr( $moppm_wp_user->user_email ) . '" /></td>
 					</tr>
 
 					<tr>

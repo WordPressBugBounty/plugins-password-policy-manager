@@ -19,7 +19,7 @@ $moppm_premium_doc = array(
 	'hide_password_reset_link_from_wp_login' => 'https://plugins.miniorange.com/how-to-configure-miniorange-password-policy-settings#step7',
 );
 
-$password_policy_settings = array(
+$moppm_password_policy_settings = array(
 	'password_policy_setting'                => 'https://www.youtube.com/watch?v=ZnwEDbedz1A&t=16s',
 	'expiry_time'                            => 'https://www.youtube.com/watch?v=ZnwEDbedz1A&t=34s',
 	'one_click_reset_password'               => 'https://www.youtube.com/watch?v=ZnwEDbedz1A&t=89s',
@@ -28,5 +28,3 @@ $password_policy_settings = array(
 	'custom_redirect_url'                    => 'https://www.youtube.com/watch?v=ZnwEDbedz1A&t=200s',
 	'hide_password_reset_link_from_wp_login' => 'https://www.youtube.com/watch?v=ZnwEDbedz1A&t=200s',
 );
-
-

@@ -31,9 +31,9 @@ if ( ! class_exists( 'MOPPM_Constants' ) ) {
 		 * @return void
 		 */
 		public function define_global() {
-			global $moppm_db_queries,$moppm_utility,$moppm_dirname;
+			global $moppm_db_queries, $moppm_utility, $moppm_dirname;
 			$moppm_db_queries = new MOPPM_DATABASE();
-			$moppm_dirname    = plugin_dir_path( dirname( __FILE__ ) );
+			$moppm_dirname    = plugin_dir_path( __DIR__ );
 		}
 	}
 }new MOPPM_Constants();

@@ -38,11 +38,9 @@ wp_print_scripts( 'moppm_admin_datatable_script' );
 		<?php
 				global $wpdb;
 				global $moppm_db_queries;
-				$result = $moppm_db_queries->moppm_get_report_list();
-				global $results;
-				$disabled = '';
-		foreach ( $result as $results ) {
-			echo "<tr class='moppm_not_bold' id =" . esc_attr( $results->id ) . '><td>' . esc_html( $results->id ) . '</td><td>' . esc_html( $results->user_email ) . '</td><td>' . esc_html( $results->Login_time ) . '</td><td>' . esc_html( $results->Logout_time ) . '</td><td>  <a style="cursor:pointer;" onclick=removefromlist(' . esc_js( $results->id ) . ')>Remove</a></td></tr>'; //phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Object property name coming from database , so can't change it to snakecase format
+				$moppm_report_rows = $moppm_db_queries->moppm_get_report_list();
+		foreach ( $moppm_report_rows as $moppm_report_row ) {
+			echo "<tr class='moppm_not_bold' id =" . esc_attr( $moppm_report_row->id ) . '><td>' . esc_html( $moppm_report_row->id ) . '</td><td>' . esc_html( $moppm_report_row->user_email ) . '</td><td>' . esc_html( $moppm_report_row->Login_time ) . '</td><td>' . esc_html( $moppm_report_row->Logout_time ) . '</td><td>  <a style="cursor:pointer;" onclick=removefromlist(' . esc_js( $moppm_report_row->id ) . ')>Remove</a></td></tr>'; //phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Object property name coming from database , so can't change it to snakecase format
 		}
 		?>
 					</tbody>
@@ -60,7 +58,7 @@ wp_print_scripts( 'moppm_admin_datatable_script' );
 				<table style="width:100%">
 				<tbody>
 				<tr class="moppm-header">
-					<td class="moppm_1click_text1">Inactive Users Report <?php echo '  <a href="' . esc_url_raw( $upgrade_url ) . '" style="color: red;font-size:14px;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></td>
+					<td class="moppm_1click_text1">Inactive Users Report <?php echo '  <a href="' . esc_url_raw( $moppm_upgrade_url ) . '" style="color: red;font-size:14px;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></td>
 					<td ><input type="button" value="Remove All"  id="moppm_clear_all_inactive" class="button button-primary button-large"></td>
 				</tr>
 				</tbody>
@@ -70,12 +68,12 @@ wp_print_scripts( 'moppm_admin_datatable_script' );
 				<thead><tr><th>User ID&emsp;&emsp;</th><th>User Email&emsp;&emsp;</th><th>Status&emsp;&emsp;</th><th>Action&emsp;&emsp;</th></tr></thead>
 				<tbody>
 			<?php
-				$meta_key = 'moppm_inactive_user_is_block';
-				$users    = get_users();
-			if ( ! empty( $users ) ) {
-				foreach ( $users as $user ) {
-					if ( get_user_meta( $user->ID, $meta_key ) ) {
-						echo "<tr class='moppm_not_bold' id =" . esc_attr( $user->ID ) . '><td>' . esc_html( $user->ID ) . '</td><td>' . esc_html( $user->user_email ) . '</td><td>Locked</td><td>  <a onclick=removefrominactivelist(' . esc_js( $user->ID ) . ')>Remove</a></td></tr>';
+				$moppm_inactive_meta_key = 'moppm_inactive_user_is_block';
+				$moppm_inactive_users    = get_users();
+			if ( ! empty( $moppm_inactive_users ) ) {
+				foreach ( $moppm_inactive_users as $moppm_inactive_report_user ) {
+					if ( get_user_meta( $moppm_inactive_report_user->ID, $moppm_inactive_meta_key ) ) {
+						echo "<tr class='moppm_not_bold' id =" . esc_attr( $moppm_inactive_report_user->ID ) . '><td>' . esc_html( $moppm_inactive_report_user->ID ) . '</td><td>' . esc_html( $moppm_inactive_report_user->user_email ) . '</td><td>Locked</td><td>  <a onclick=removefrominactivelist(' . esc_js( $moppm_inactive_report_user->ID ) . ')>Remove</a></td></tr>';
 					}
 				}
 			}

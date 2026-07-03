@@ -19,7 +19,7 @@ body {
   width: 50%;
   padding: 10px;
   color: white;
-  border:2px solid #2271b1;
+  border:2px solid var(--wp-admin-theme-color);
 }
 .moppm_form_value {
   float: inherit;
@@ -176,7 +176,7 @@ input[type="radio"] {
 }
 .moppm_selector {
   height: 20px;
-  width: -2% !important;
+  width: 60px !important;
   line-height: 3 !important;
   margin-left: 1%;
 }
@@ -334,7 +334,7 @@ input:focus + .mo_wpns_slider {
 .moppm_policy_tab .nav-tab-active{
   margin-bottom: -4px;
   font-size: small;
-  background-color: #2271b1;
+  background: var(--wp-admin-theme-color);
   color: #fff;
 }
 
@@ -471,7 +471,7 @@ border-radius: 5px;
 
 .moppm_instruction{
   font-size: 10px;
-  color: #2271b1;
+  color: var(--wp-admin-theme-color);
 }
 
 .moppm_rest_row{
@@ -795,7 +795,7 @@ input[type="radio"] {
 }
  .moppm_selector
  {
-    width: 50px;
+    width: 60px;
  }
 
  .moppm_selector1
@@ -1205,7 +1205,7 @@ opacity: 0;
   transition: .4s;
 }
 input:checked + .moppm_switch_slider {
-  background-color: #2271b1;
+  background: var(--wp-admin-theme-color);
 }
 
 input:focus + .moppm_switch_slider {
@@ -1250,7 +1250,7 @@ input:checked + .moppm_switch_slider:before {
 }
 
 input:checked + .mo_wpns_slider {
-  background-color: #2271b1;
+  background: var(--wp-admin-theme-color);
 }
 
 input:focus + .mo_wpns_slider {
@@ -1304,10 +1304,10 @@ input:checked + .mo_wpns_slider:before {
   transition: .4s;
 }
 input:checked + .mo_wpns_slider_small {
-  background-color: #2271b1;
+  background: var(--wp-admin-theme-color);
 }
 input:focus + .mo_wpns_slider_small {
-  box-shadow: 0 0 1px #2271b1;
+  box-shadow: 0 0 1px var(--wp-admin-theme-color);
 }
 
 input:checked + .mo_wpns_slider_small:before {
@@ -1371,7 +1371,7 @@ input:checked + .mo_wpns_slider_small:before {
 
 .moppm_invalid
 {
-  margin-top: 18px;
+  margin-top: 10px;
   color: red;
 }   
 .moppm_reset_first_div
@@ -1418,7 +1418,7 @@ input:checked + .mo_wpns_slider_small:before {
 .moppm_policy_tab .nav-tab-active{
   margin-bottom: -4px;
   font-size: small;
-  background-color: #2271b1;
+  background: var(--wp-admin-theme-color);
   color: #fff;
 }
 

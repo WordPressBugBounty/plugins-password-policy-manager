@@ -8,24 +8,22 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-	global $moppm_dirname,$moppm_db_queries;
+	global $moppm_dirname, $moppm_db_queries;
 
 if ( current_user_can( 'manage_options' ) && isset( $_POST['option'] ) ) {//phpcs:ignore WordPress.Security.NonceVerification.Missing -- have used nonce in function 
-	$option = sanitize_text_field( wp_unslash( $_POST['option'] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Missing -- have used nonce in function
-	switch ( $option ) {
+	$moppm_support_option = sanitize_text_field( wp_unslash( $_POST['option'] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Missing -- have used nonce in function
+	switch ( $moppm_support_option ) {
 		case 'moppm_send_query':
 			moppm_handle_support_form();
 			break;
 	}
 }
 
-	$current_user_var = wp_get_current_user();
-	$phone            = get_site_option( 'moppm_admin_phone' );
+	$moppm_current_user_for_support = wp_get_current_user();
+	$moppm_admin_phone              = get_site_option( 'moppm_admin_phone' );
 
 
-if ( empty( $email ) ) {
-	$email = $current_user_var->user_email;
-}
+	$moppm_support_email = $moppm_current_user_for_support->user_email;
 	require_once $moppm_dirname . 'views' . DIRECTORY_SEPARATOR . 'support.php';
 /**
  * Function to handle support form

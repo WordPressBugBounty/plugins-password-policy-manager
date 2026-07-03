@@ -8,6 +8,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Procedural admin template (included from controller); locals are not WordPress globals.
 global $moppm_directory_url;
 
 $setup_dir_name = $moppm_directory_url . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'account' . DIRECTORY_SEPARATOR . 'link-tracer.php';
@@ -15,7 +17,7 @@ require_once $setup_dir_name;
 ?>
 <div id="main_class" style="display: flex;">
 	<div id="main_first" style="width: 50%;">
-		<h1 class="moppm_h1_ad"><b><?php esc_html_e( 'Premium Features', 'password-policy-manager' ); ?></b> <span class="moppm_advertise"> <?php echo '  <a href="' . esc_url( $upgrade_url ) . '" style="color: red; font-weight:bold;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></span> </h1>
+		<h1 class="moppm_h1_ad"><b><?php esc_html_e( 'Premium Features', 'password-policy-manager' ); ?></b> <span class="moppm_advertise"> <?php echo '  <a href="' . esc_url( $moppm_upgrade_url ) . '" style="color: red; font-weight:bold;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></span> </h1>
 	</div>
 	<div class="" style="width: 50%;margin-top: 1em;"></div>
 </div>
@@ -26,7 +28,7 @@ require_once $setup_dir_name;
 			<tr>
 				<td class="moppm_premium_feature_text"> <?php esc_html_e( 'Disallow Previously Used Passwords', 'password-policy-manager' ); ?> <span class="moppm_premium_instruction" id="error1"></span>
 					<a href='<?php echo esc_url( $moppm_premium_doc['disallow_previously_used_passwords'] ); ?>' target="_blank" class="dashicons dashicons-text-page" title="More Information"></a>
-					<a href='<?php echo esc_url( $password_policy_settings['password_policy_setting'] ); ?>' target="_blank" class="dashicons dashicons-video-alt3"></a>
+					<a href='<?php echo esc_url( $moppm_password_policy_settings['password_policy_setting'] ); ?>' target="_blank" class="dashicons dashicons-video-alt3"></a>
 				</td>
 				<td class="moppm_premium_button"><label class="mo_wpns_switch">
 						<input disabled type="checkbox" id="Moppm_previously_used" name="Moppm_previously_used"><span class="mo_wpns_slider mo_wpns_round mo_ppm_switch"></span>
@@ -50,7 +52,7 @@ require_once $setup_dir_name;
 				<td class="moppm_premium_feature_text"><?php esc_html_e( 'Automatically Lock Inactive Users', 'password-policy-manager' ); ?> <span class="moppm_premium_instruction" id="error3"></span>
 					<a href='<?php echo esc_url( $moppm_premium_doc['automatically_lock_inactive_users'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-text-page" title="More Information"></span></a>
-					<a href='<?php echo esc_url( $password_policy_settings['automatically_lock_inactive_users'] ); ?>' target="_blank">
+					<a href='<?php echo esc_url( $moppm_password_policy_settings['automatically_lock_inactive_users'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-video-alt3" title="More Information"></span>
 					</a>
 				</td>
@@ -80,7 +82,7 @@ require_once $setup_dir_name;
 				<td class="moppm_premium_feature_text"><?php esc_html_e( 'Custom Redirect Url', 'password-policy-manager' ); ?> <span class="moppm_premium_instruction" id="error5"></span>
 					<a href='<?php echo esc_url( $moppm_premium_doc['custom_redirect_url'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-text-page" title="More Information"></span></a>
-					<a href='<?php echo esc_url( $password_policy_settings['custom_redirect_url'] ); ?>' target="_blank">
+					<a href='<?php echo esc_url( $moppm_password_policy_settings['custom_redirect_url'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-video-alt3" title="More Information"></span>
 					</a>
 				</td>
@@ -132,7 +134,7 @@ require_once $setup_dir_name;
 				<td class="moppm_premium_feature_text"> <?php esc_html_e( 'Generate Random Password', 'password-policy-manager' ); ?> <span class="moppm_premium_instruction" id="error4"></span>
 					<a href='<?php echo esc_url( $moppm_premium_doc['generate_random_password'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-text-page" title="More Information"></span></a>
-					<a href='<?php echo esc_url( $password_policy_settings['generate_random_password'] ); ?>' target="_blank">
+					<a href='<?php echo esc_url( $moppm_password_policy_settings['generate_random_password'] ); ?>' target="_blank">
 						<span class="dashicons dashicons-video-alt3" title="More Information"></span>
 					</a>
 				</td>
@@ -152,7 +154,7 @@ require_once $setup_dir_name;
 				<td class="moppm_premium_feature_text"><?php esc_html_e( 'Hide Password Reset Link From WP-login ', 'password-policy-manager' ); ?><span class="moppm_premium_instruction" id="error6">
 						<a href='<?php echo esc_url( $moppm_premium_doc['hide_password_reset_link_from_wp_login'] ); ?>' target="_blank">
 							<span class="dashicons dashicons-text-page" title="More Information"></span></a>
-						<a href='<?php echo esc_url( $password_policy_settings['hide_password_reset_link_from_wp_login'] ); ?>' target="_blank">
+						<a href='<?php echo esc_url( $moppm_password_policy_settings['hide_password_reset_link_from_wp_login'] ); ?>' target="_blank">
 							<span class="dashicons dashicons-video-alt3" title="More Information"></span>
 						</a>
 				</td>
@@ -169,3 +171,4 @@ require_once $setup_dir_name;
 		Moppm_error_msg("This feature is available in premium plugins.");
 	});
 </script>
+<?php /* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */ ?>

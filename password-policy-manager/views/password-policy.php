@@ -8,6 +8,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Procedural admin template (included from controller); locals are not WordPress globals.
 $moppm_allowed_html = array(
 	'div'    => array( 'class' => array() ),
 	'ul'     => array(),
@@ -31,7 +33,7 @@ require_once $setup_dir_name;
 		Specific Roles </label>
 	<span style="float:right;"> 
 		<a href='<?php echo esc_url( $moppm_premium_doc['password_policy_setting'] ); ?>' target="_blank" class="dashicons dashicons-text-page" title="More Information"></a>
-		<a href='<?php echo esc_url( $password_policy_settings['password_policy_setting'] ); ?>' target="_blank" class="dashicons dashicons-video-alt3"></a>
+		<a href='<?php echo esc_url( $moppm_password_policy_settings['password_policy_setting'] ); ?>' target="_blank" class="dashicons dashicons-video-alt3"></a>
 	</span>
 </div>
 <div class="moppm_show_roles">
@@ -59,7 +61,7 @@ require_once $setup_dir_name;
 	}
 	?>
 	<br><br><br>
-	<span class="moppm_advertise"><?php esc_html_e( 'This feature is available in our', 'password-policy-manager' ); ?> <a href="admin.php?page=moppm_upgrade" style="font-weight:bold;">Premium and Enterprise</a> <?php esc_html_e( 'plugins ', 'password-policy-manager' ); ?><?php echo '<a href="' . esc_url( $upgrade_url ) . '" style="color: red; font-weight:bold;">'; ?>[ UPGRADE ]</a></span>
+	<span class="moppm_advertise"><?php esc_html_e( 'This feature is available in our', 'password-policy-manager' ); ?> <a href="admin.php?page=moppm_upgrade" style="font-weight:bold;">Premium and Enterprise</a> <?php esc_html_e( 'plugins ', 'password-policy-manager' ); ?><?php echo '<a href="' . esc_url( $moppm_upgrade_url ) . '" style="color: red; font-weight:bold;">'; ?>[ UPGRADE ]</a></span>
 	<hr>
 </div>
 <div class="moppm_show_user_redirect">
@@ -184,6 +186,7 @@ require_once $setup_dir_name;
 					jQuery('.moppm_show_roles').hide();
 					jQuery('.moppm_show_user_redirect').show();
 					jQuery('.moppm_hide_user_redirect').find('input, textarea, button, select').removeAttr('disabled');
+					jQuery('#moppm_expiration_time, #moppm_select_type_of_days').prop( 'disabled', true );
 					jQuery('.moppm_for_Select_users-div').removeClass('nav-tab-active');
 					jQuery('.moppm_for_roles-div').addClass('nav-tab-active');
 
@@ -292,3 +295,4 @@ require_once $setup_dir_name;
 					});
 				});
 			</script>
+<?php /* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */ ?>

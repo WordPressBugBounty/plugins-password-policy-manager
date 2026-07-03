@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 global $moppm_dir;
-$back_button        = admin_url() . 'admin.php?page=moppm';
+$moppm_back_button  = admin_url() . 'admin.php?page=moppm';
 $moppm_allowed_html = array(
 	'div'    => array( 'class' => array() ),
 	'ul'     => array(),
@@ -17,7 +17,7 @@ $moppm_allowed_html = array(
 	'strong' => array(),
 	'b'      => array(),
 );
-echo '<a class="moppm_back_button" style="font-size: 16px; color: #000;" href="' . esc_url( $back_button ) . '"> <big> <big>&#8592; </big></big>' . esc_html__( 'Back To Plugin Configuration', 'password-policy-manager' ) . '</a>';
+echo '<a class="moppm_back_button" style="font-size: 16px; color: #000;" href="' . esc_url( $moppm_back_button ) . '"> <big> <big>&#8592; </big></big>' . esc_html__( 'Back To Plugin Configuration', 'password-policy-manager' ) . '</a>';
 ?>
 <div class="moppm_upgrade_super_div" id="moppm_pass_plans">
 <div class="moppm_upgrade_main_div">

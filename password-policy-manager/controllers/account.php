@@ -8,11 +8,11 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-global $moppm_utility,$moppm_dirname,$moppm_db_queries;
+global $moppm_utility, $moppm_dirname, $moppm_db_queries;
 
 if ( current_user_can( 'manage_options' ) && isset( $_POST['option'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Missing -- used nonce verification in each functions
-	$option = trim( sanitize_text_field( wp_unslash( $_POST['option'] ) ) ); //phpcs:ignore WordPress.Security.NonceVerification.Missing -- used nonce verification in each functions
-	switch ( $option ) {
+	$moppm_account_option = trim( sanitize_text_field( wp_unslash( $_POST['option'] ) ) ); //phpcs:ignore WordPress.Security.NonceVerification.Missing -- used nonce verification in each functions
+	switch ( $moppm_account_option ) {
 		case 'moppm_register_user':
 			moppm_register_user();
 			break;
@@ -31,20 +31,20 @@ if ( current_user_can( 'manage_options' ) && isset( $_POST['option'] ) ) { //php
 	}
 }
 
-	$user = wp_get_current_user();
+$moppm_wp_user = wp_get_current_user();
 
 if ( get_site_option( 'moppm_verify_customer' ) === 'true' ) {
 
-	$admin_email = get_site_option( 'moppm_email' ) ? get_site_option( 'moppm_email' ) : '';
+	$moppm_admin_email = get_site_option( 'moppm_email' ) ? get_site_option( 'moppm_email' ) : '';
 	include $moppm_dirname . 'views' . DIRECTORY_SEPARATOR . 'account' . DIRECTORY_SEPARATOR . 'login.php';
 } elseif ( ! moppm_icr() ) {
 
 	include $moppm_dirname . 'views' . DIRECTORY_SEPARATOR . 'account' . DIRECTORY_SEPARATOR . 'register.php';
 } else {
-	$email = get_site_option( 'moppm_email' );
-	$key   = get_site_option( 'moppm_customerKey' );
-	$api   = get_site_option( 'moppm_api_key' );
-	$token = get_site_option( 'moppm_customer_token' );
+	$moppm_profile_email        = get_site_option( 'moppm_email' );
+	$moppm_profile_customer_key = get_site_option( 'moppm_customerKey' );
+	$moppm_profile_api_key      = get_site_option( 'moppm_api_key' );
+	$moppm_profile_token        = get_site_option( 'moppm_customer_token' );
 	include $moppm_dirname . 'views' . DIRECTORY_SEPARATOR . 'account' . DIRECTORY_SEPARATOR . 'profile.php';
 }
 
@@ -107,7 +107,6 @@ function moppm_goto_sign_in_page() {
 		return;
 	}
 	update_site_option( 'moppm_verify_customer', 'true' );
-
 }
 
 /**

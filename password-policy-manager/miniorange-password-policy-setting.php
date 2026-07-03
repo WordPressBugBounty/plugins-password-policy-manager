@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Password Policy Manager
  * Description: This plugin enables configurable password policies for the Stronger passwords. We Support Password expiration, Enforce strong password for all Users in the free version of the plugin.
- * Version: 2.0.6
+ * Version: 2.0.7
  * Author: miniOrange
  * Author URI: https://miniorange.com
  * Text Domain: password-policy-manager
@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 	define( 'MOPPM_HOST_NAME', 'https://login.xecurify.com' );
-	define( 'MOPPM_VERSION', '2.0.6' );
+	define( 'MOPPM_VERSION', '2.0.7' );
 	define( 'MOPPM_TEST_MODE', false );
-	global $moppm_dir,$moppm_directory_url;
+	global $moppm_dir, $moppm_directory_url;
 	$moppm_dir           = plugin_dir_url( __FILE__ );
 	$moppm_directory_url = plugin_dir_path( __FILE__ );
 
@@ -51,7 +51,6 @@ if ( ! class_exists( 'MOPPM' ) ) {
 			add_action( 'user_profile_update_errors', array( $this, 'profile_authenticate' ), 0, 3 );
 			add_action( 'user_register', array( $this, 'moppm_create_usermeta' ) );
 			add_action( 'admin_init', array( $this, 'moppm_redirect_page' ) );
-			add_action( 'elementor/init', array( $this, 'moppm_login_extra_note' ) );
 			add_filter( 'manage_users_columns', array( $this, 'moppm_password_column' ) );
 			add_action( 'manage_users_custom_column', array( $this, 'moppm_password_column_content' ), 10, 3 );
 			add_action( 'plugins_loaded', array( $this, 'moppm_update_db_check' ) );
@@ -61,7 +60,6 @@ if ( ! class_exists( 'MOPPM' ) ) {
 			if ( is_admin() ) {
 				add_filter( 'plugin_action_links', array( $this, 'moppm_add_plugin_action_links' ), 10, 2 );
 			}
-
 		}
 		/**
 		 * Add plugin main file link using plugin_action_links filter.
@@ -71,7 +69,7 @@ if ( ! class_exists( 'MOPPM' ) ) {
 		 * @return string
 		 */
 		public function moppm_add_plugin_action_links( $links, $file ) {
-			if ( plugin_basename( dirname( __FILE__ ) . '/miniorange-password-policy-setting.php' ) === $file ) {
+			if ( plugin_basename( __DIR__ . '/miniorange-password-policy-setting.php' ) === $file ) {
 				$links[] = '<a href="admin.php?page=moppm">Settings</a>';
 				$links[] = '<a href="admin.php?page=moppm_upgrade" style="color:orange;font-weight:bold">Upgrade</a>';
 			}
@@ -274,29 +272,10 @@ if ( ! class_exists( 'MOPPM' ) ) {
 				if ( ! empty( $moppm_score[0] ) ) {
 					$moppm_score = intval( $moppm_score[0] );
 					return ( '<span style="margin-left:30%;">' . esc_html( $moppm_score ) . ' <span>' );
-				} 
+				}
 				return ( '<span style="margin-left:30%;">' . esc_html( '0' ) . ' <span>' );
 			}
 			return $value;
-		}
-
-		/**
-		 * Function to enqueue script file when elementor plugin is initialised
-		 *
-		 * @return void
-		 */
-		public function moppm_login_extra_note() {
-			if ( ! is_user_logged_in() ) {
-				wp_enqueue_script( 'jquery' );
-				wp_enqueue_script( 'moppm_elementor_script', plugins_url( 'includes/js/moppm_elementor.min.js', __FILE__ ), array( 'jquery' ), MOPPM_VERSION, true );
-				wp_localize_script(
-					'moppm_elementor_script',
-					'my_ajax_object',
-					array( 'ajax_url' => get_site_url() . '/login/' )
-				);
-
-			}
-
 		}
 
 		/**
@@ -314,15 +293,12 @@ if ( ! class_exists( 'MOPPM' ) ) {
 				$nonce = sanitize_key( $_POST['moppm_register_to_upgrade_nonce'] );
 				if ( ! wp_verify_nonce( $nonce, 'miniorange-moppm-user-reg-to-upgrade-nonce' ) ) {
 					update_site_option( 'mo_ppm_message', 'INVALID_REQ' );
-				} else {
-					if ( isset( $_POST['requestOrigin'] ) ) {
-						$requestorigin = esc_url_raw( wp_unslash( $_POST['requestOrigin'] ) );
-						update_site_option( 'mo_ppm_customer_selected_plan', $requestorigin );
-						header( 'Location: admin.php?page=moppm_account' );
-					}
+				} elseif ( isset( $_POST['requestOrigin'] ) ) {
+					$requestorigin = esc_url_raw( wp_unslash( $_POST['requestOrigin'] ) );
+					update_site_option( 'mo_ppm_customer_selected_plan', $requestorigin );
+					header( 'Location: admin.php?page=moppm_account' );
 				}
 			}
-
 		}
 		/**
 		 * Function to run after password reset form.
@@ -352,7 +328,6 @@ if ( ! class_exists( 'MOPPM' ) ) {
 				add_user_meta( $user->ID, 'moppm_first_reset', '2' );
 				update_user_meta( $user->ID, 'moppm_last_pass_timestmp', time() );
 			}
-
 		}
 
 		/**
@@ -375,7 +350,6 @@ if ( ! class_exists( 'MOPPM' ) ) {
 			if ( get_site_option( 'moppm_enable_disable_report' ) === 'on' ) {
 				$moppm_db_queries->insert_report_list( $user_id, $user->user_email, $log_time, $log_out_time );
 			}
-
 		}
 		/**
 		 * Function to do additional validation on password change from user profile section.
@@ -476,14 +450,13 @@ if ( ! class_exists( 'MOPPM' ) ) {
 		 */
 		public function moppm_widget_menu() {
 			$menu_slug = 'moppm';
-			add_menu_page( 'miniOrange Password policy', 'Password Policy Manager', 'administrator', $menu_slug, array( $this, 'moppm' ), plugin_dir_url( __FILE__ ) . 'includes/images/miniorange_icon.png' );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Addons', 'administrator', 'moppm_addons', array( $this, 'moppm' ), 1 );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Reports', 'administrator', 'moppm_reports', array( $this, 'moppm' ), 2 );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Upgrade', 'administrator', 'moppm_upgrade', array( $this, 'moppm' ), 3 );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Account', 'administrator', 'moppm_account', array( $this, 'moppm' ), 4 );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Integrations', 'administrator', 'moppm_registration_form', array( $this, 'moppm' ), 5 );
-			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Other Products', 'administrator', 'moppm_advertise', array( $this, 'moppm' ), 6 );
-
+			add_menu_page( 'miniOrange Password policy', 'Password Policy Manager', 'manage_options', $menu_slug, array( $this, 'moppm' ), plugin_dir_url( __FILE__ ) . 'includes/images/miniorange_icon.png' );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Addons', 'manage_options', 'moppm_addons', array( $this, 'moppm' ), 1 );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Reports', 'manage_options', 'moppm_reports', array( $this, 'moppm' ), 2 );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Upgrade', 'manage_options', 'moppm_upgrade', array( $this, 'moppm' ), 3 );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Account', 'manage_options', 'moppm_account', array( $this, 'moppm' ), 4 );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Integrations', 'manage_options', 'moppm_registration_form', array( $this, 'moppm' ), 5 );
+			add_submenu_page( $menu_slug, 'miniOrange Password policy', 'Other Products', 'manage_options', 'moppm_advertise', array( $this, 'moppm' ), 6 );
 		}
 		/**
 		 * Function to send password reset link to user email
@@ -501,6 +474,8 @@ if ( ! class_exists( 'MOPPM' ) ) {
 			$url_new     = esc_url_raw( $url );
 			$network_url = esc_url_raw( network_site_url( "wp-login.php?action=rp&key=$adt_rp_key&login=" . rawurlencode( sanitize_text_field( $user_login ) ), 'login' ) );
 
+			$moppm_email_logo_url = esc_url( plugins_url( 'includes/images/miniorange_logo.png', __FILE__ ) );
+
 			$subject  = 'Reset password link';
 			$messages = '<table cellpadding="25" style="margin:0px auto">
                             <tbody>
@@ -509,7 +484,7 @@ if ( ! class_exists( 'MOPPM' ) ) {
                             <table cellpadding="24" width="584px" style="margin:0 auto;max-width:584px;background-color:#f6f4f4;border:1px solid #a8adad">
                             <tbody>
                             <tr>
-                            <td><img src="https://ci5.googleusercontent.com/proxy/10EQeM1udyBOkfD2dwxGhIaMXV4lOwCRtUecpsDkZISL0JIkOL2JhaYhVp54q6Sk656rW2rpAFJFEgGQiAOVcYIIKxXYMHHMNSNB=s0-d-e1-ft#https://login.xecurify.com/moas/images/xecurify-logo.png" style="color:#5fb336;text-decoration:none;display:block;width:auto;height:auto;max-height:35px" class="CToWUd"></td>
+                            <td><img src="' . $moppm_email_logo_url . '" alt="" style="color:#5fb336;text-decoration:none;display:block;width:auto;height:auto;max-height:35px" class="CToWUd"></td>
                             </tr>
                             </tbody>
                             </table>
@@ -580,11 +555,11 @@ if ( ! class_exists( 'MOPPM' ) ) {
 		 */
 		public function moppm_settings_style( $hook ) {
 			if ( strpos( $hook, 'page_moppm' ) ) {
-				wp_enqueue_style( 'moppm_admin_settings_style', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_style_settings.min.css', __FILE__ ), array(), MOPPM_VERSION );
+				wp_enqueue_style( 'moppm_admin_settings_style', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_style_settings.css', __FILE__ ), array(), MOPPM_VERSION );
 				wp_enqueue_style( 'moppm_admin_settings_datatable_style', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'jquery.dataTables.min.css', __FILE__ ), array(), MOPPM_VERSION );
 			}
-			wp_enqueue_style( 'moppm_admin_offers', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_offers.min.css', __FILE__ ), array(), MOPPM_VERSION );
-			wp_enqueue_style( 'moppm_upgrade_css', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_upgrade.min.css', __FILE__ ), array(), MOPPM_VERSION );
+			wp_enqueue_style( 'moppm_admin_offers', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_offers.css', __FILE__ ), array(), MOPPM_VERSION );
+			wp_enqueue_style( 'moppm_upgrade_css', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'moppm_upgrade.css', __FILE__ ), array(), MOPPM_VERSION );
 		}
 
 		/**
@@ -594,7 +569,7 @@ if ( ! class_exists( 'MOPPM' ) ) {
 		 * @return void
 		 */
 		public function moppm_settings_script( $hook ) {
-			wp_enqueue_script( 'moppm_admin_settings_script', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'moppm_settings_page.min.js', __FILE__ ), array( 'jquery' ), MOPPM_VERSION, true );
+			wp_enqueue_script( 'moppm_admin_settings_script', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'moppm_settings_page.js', __FILE__ ), array( 'jquery' ), MOPPM_VERSION, true );
 			if ( strpos( $hook, 'page_moppm' ) ) {
 				wp_enqueue_script( 'moppm_admin_datatable_script', plugins_url( 'includes' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'jquery.dataTables.min.js', __FILE__ ), array( 'jquery' ), MOPPM_VERSION, true );
 			}
@@ -696,8 +671,9 @@ if ( ! class_exists( 'MOPPM' ) ) {
 			wp_enqueue_style( 'wp-pointer' );
 			wp_enqueue_script( 'wp-pointer' );
 			wp_enqueue_script( 'utils' );
-			wp_enqueue_style( 'moppm_admin_plugins_page_style', plugins_url( '/includes/css/moppm_feedback_style.min.css?ver=' . MOPPM_VERSION, __FILE__ ), array(), MOPPM_VERSION );
+			wp_enqueue_style( 'moppm_admin_plugins_page_style', plugins_url( 'includes/css/moppm_feedback_style.css', __FILE__ ), array(), MOPPM_VERSION );
 
 			include $moppm_dirname . 'views' . DIRECTORY_SEPARATOR . 'feedback-form.php';
 		}
-	}}new MOPPM();
+	}
+}new MOPPM();

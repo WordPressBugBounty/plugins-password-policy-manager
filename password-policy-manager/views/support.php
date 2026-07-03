@@ -8,12 +8,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$support_logo = dirname( plugin_dir_url( __FILE__ ) ) . '/includes/images/support.png	';
+$moppm_support_logo = dirname( plugin_dir_url( __FILE__ ) ) . '/includes/images/support.png	';
 
 echo '	
 		<div class = "moppm_mo_page_divided_layout_2">
 			
-			<img src="' . esc_url_raw( $support_logo ) . '">
+			<img src="' . esc_url_raw( $moppm_support_logo ) . '">
 			<h1>' . esc_html__( 'Support', 'password-policy-manager' ) . '</h1>
 			<p>' . esc_html__( 'Need any help? We are available any time, Just send us a query so we can help you.', 'password-policy-manager' ) . '</p>
 				<form name="f" method="post" action="">
@@ -21,11 +21,11 @@ echo '
 					<input type="hidden" name="nonce" value="' . esc_attr( wp_create_nonce( 'sendQueryNonce' ) ) . '"/>
 					<table class="moppm_mo_settings_table">
 						<tr><td>
-							<input type="email" class="moppm_table_textbox" id="query_email" name="query_email" value="' . esc_attr( $email ) . '" placeholder="Enter your email" required />
+							<input type="email" class="moppm_table_textbox" id="query_email" name="query_email" value="' . esc_attr( $moppm_support_email ) . '" placeholder="Enter your email" required />
 							</td>
 						</tr>
 						<tr><td>
-							<input type="tel" class="moppm_table_textbox" name="query_phone" id="query_phone" value="' . esc_attr( $phone ) . '" placeholder="Enter your phone"/>
+							<input type="tel" class="moppm_table_textbox" name="query_phone" id="query_phone" value="' . esc_attr( $moppm_admin_phone ) . '" placeholder="Enter your phone"/>
 							</td>
 						</tr>
 						<tr>

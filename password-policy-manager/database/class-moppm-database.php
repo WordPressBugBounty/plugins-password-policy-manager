@@ -62,7 +62,6 @@ if ( ! class_exists( 'MOPPM_DATABASE' ) ) {
 				$sql = 'CREATE TABLE ' . $tablename . ' (`id` int NOT NULL AUTO_INCREMENT, `user_email` mediumtext NOT NULL, `Login_time` mediumtext,`Logout_time` mediumtext, UNIQUE KEY id (id) );'; //phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange -- Creating a database table 
 				dbDelta( $sql );
 			}
-
 		}
 
 		/**
@@ -126,6 +125,5 @@ if ( ! class_exists( 'MOPPM_DATABASE' ) ) {
 			$table_name = $this->report_table;
 			$wpdb->query( $wpdb->prepare( 'UPDATE %1s SET Logout_time= %s  WHERE id = %d ', array( $table_name, $log_out_time, $user_id ) ) );//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQLPlaceholders.UnquotedComplexPlaceholder -- complex placeholder is required for database tablename, wpdb required here and catching is not required here.
 		}
-
 	}
 }

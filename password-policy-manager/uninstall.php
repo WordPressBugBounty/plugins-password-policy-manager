@@ -26,15 +26,14 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	global $wpdb;
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}moppm_user_login_info" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery , WordPress.DB.DirectDatabaseQuery.NoCaching , WordPress.DB.DirectDatabaseQuery.SchemaChange -- droping the database table on uninstallation of the plugin, wpdb required here and catching is not required here.
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}moppm_user_report_table" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery , WordPress.DB.DirectDatabaseQuery.NoCaching , WordPress.DB.DirectDatabaseQuery.SchemaChange -- droping the database table on uninstallation of the plugin, wpdb required here and catching is not required here.
-	$users = get_users();
-if ( ! empty( $users ) ) {
-	foreach ( $users as $user ) {
-		delete_user_meta( $user->ID, 'moppm_points' );
-		delete_user_meta( $user->ID, 'moppm_pass_score' );
-		delete_user_meta( $user->ID, 'moppm_first_reset' );
+	$moppm_all_users = get_users();
+if ( ! empty( $moppm_all_users ) ) {
+	foreach ( $moppm_all_users as $moppm_uninstall_user ) {
+		delete_user_meta( $moppm_uninstall_user->ID, 'moppm_points' );
+		delete_user_meta( $moppm_uninstall_user->ID, 'moppm_pass_score' );
+		delete_user_meta( $moppm_uninstall_user->ID, 'moppm_first_reset' );
 	}
 }
 	$moppm_attempt = base64_encode( 'moppm_no_of_attempt' ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- not used for obfuscation.
 	delete_site_option( $moppm_attempt );
 	delete_site_option( 'moppm_enable_disable_expiry' );
-

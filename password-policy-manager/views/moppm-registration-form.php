@@ -9,20 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 global $moppm_dir;
-$woocommerce_logo       = $moppm_dir . '/includes/images/woocommerce.png';
-$ultimate_member_logo   = $moppm_dir . '/includes/images/ultimate_member.png';
-$user_registration_logo = $moppm_dir . '/includes/images/user_registration.png';
-$buddy_press_logo       = $moppm_dir . '/includes/images/BuddyPress.png';
-$memberpress_logo       = $moppm_dir . '/includes/images/memberpress.png';
-$userpro_logo           = $moppm_dir . '/includes/images/userpro.png';
-$gravity_forms_logo     = $moppm_dir . '/includes/images/gravity-forms.png';
-$bbpress_logo           = $moppm_dir . '/includes/images/bbpress.png';
-$ninja_logo             = $moppm_dir . '/includes/images/ninja.png';
-$elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
+$moppm_logo_woocommerce       = $moppm_dir . '/includes/images/woocommerce.png';
+$moppm_logo_ultimate_member   = $moppm_dir . '/includes/images/ultimate_member.png';
+$moppm_logo_user_registration = $moppm_dir . '/includes/images/user_registration.png';
+$moppm_logo_buddy_press       = $moppm_dir . '/includes/images/BuddyPress.png';
+$moppm_logo_memberpress       = $moppm_dir . '/includes/images/memberpress.png';
+$moppm_logo_userpro           = $moppm_dir . '/includes/images/userpro.png';
+$moppm_logo_gravity_forms     = $moppm_dir . '/includes/images/gravity-forms.png';
+$moppm_logo_bbpress           = $moppm_dir . '/includes/images/bbpress.png';
+$moppm_logo_ninja             = $moppm_dir . '/includes/images/ninja.png';
+$moppm_logo_elementor         = $moppm_dir . '/includes/images/elementor.png';
 ?>
 <div class="moppm_table_layout">
 <h1 class="moppm_h1_ad"><b><?php esc_html_e( 'Integrations', 'password-policy-manager' ); ?></b> </h1><br>
-<span class="moppm_text"><?php esc_html_e( 'We support most of the login forms in our premium plugin present on WordPress. And our plugin is tested with almost all the forms like Woocommerce, Ultimate Member, Elementor Pro, and so on ', 'password-policy-manager' ); ?><?php echo '  <a href="' . esc_url_raw( $upgrade_url ) . '" style="color:red;font-weight:bold;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></span><br><br>
+<span class="moppm_text"><?php esc_html_e( 'We support most of the login forms in our premium plugin present on WordPress. And our plugin is tested with almost all the forms like Woocommerce, Ultimate Member, Elementor Pro, and so on ', 'password-policy-manager' ); ?><?php echo '  <a href="' . esc_url_raw( $moppm_upgrade_url ) . '" style="color:red;font-weight:bold;text-decoration: none !important;">'; ?>[ UPGRADE ]</a></span><br><br>
 
 
 <div class="">
@@ -30,7 +30,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 		<table class="moppm_customloginform" style="width: 95%">
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $woocommerce_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Woocommerce</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_woocommerce ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Woocommerce</h3>
 				</td>
 				<td style="align-items: right;">
 					<label class="moppm_switch" >
@@ -43,7 +43,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $ultimate_member_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Ultimate Member</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_ultimate_member ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Ultimate Member</h3>
 				</td>
 				<td style="text-align: center;">
 					<label class="moppm_switch" >
@@ -56,7 +56,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $buddy_press_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Buddypress</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_buddy_press ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Buddypress</h3>
 				</td>
 				<td style="text-align: center;">
 					<label class="moppm_switch" >
@@ -69,7 +69,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td >
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $bbpress_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">BB press</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_bbpress ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">BB press</h3>
 				</td>
 				<td style="text-align: center;">
 				<label class="moppm_switch" >
@@ -82,7 +82,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $user_registration_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">User Registration</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_user_registration ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">User Registration</h3>
 				</td>
 				<td style="text-align: center;">
 				<label class="moppm_switch" >
@@ -95,7 +95,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $memberpress_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">member press</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_memberpress ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">member press</h3>
 				</td>
 				<td style="text-align: center;">
 				<label class="moppm_switch" >
@@ -108,7 +108,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $userpro_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">User pro</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_userpro ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">User pro</h3>
 				</td>
 				<td style="text-align: center;">
 				<label class="moppm_switch" >
@@ -121,7 +121,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $gravity_forms_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Gravity Forms</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_gravity_forms ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Gravity Forms</h3>
 				</td>
 				<td style="text-align: center; ">
 				<label class="moppm_switch" >
@@ -134,7 +134,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $ninja_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Ninja form</h3>
+					<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_ninja ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Ninja form</h3>
 				</td>
 				<td style="text-align: center; ">
 				<label class="moppm_switch" >
@@ -147,7 +147,7 @@ $elementor_logo         = $moppm_dir . '/includes/images/elementor.png';
 			</tr>
 			<tr>
 				<td>
-				<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $elementor_logo ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Elementor Pro</h3>
+				<?php echo '<img style="height:30px;width:30px;display: inline;"src="' . esc_url_raw( $moppm_logo_elementor ) . '">'; ?><h3 style="margin-left: 15px; font-size: large; display: inline; float: inherit; padding-right: 50px;">Elementor Pro</h3>
 				</td>
 				<td style="text-align: center; ">
 				<label class="moppm_switch" >

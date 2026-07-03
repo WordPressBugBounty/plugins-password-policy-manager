@@ -61,4 +61,40 @@
     font-weight: bold;
 }
 
+.moppm_popup_text_not_JQ {
+    color: black;
+    margin-top: 2%;
+    margin-left: 5%;
+    font-weight: 600;
+    font-size: 14px !important;
+}
+
+.moppm_overlay_not_JQ_success {
+    width: 450px;
+    height: min-content;
+    position: fixed;
+    float: right;
+    z-index: 100000;
+    top: 0;
+    right: 0;
+    margin-top: 7%;
+    background-color: #bcffb4 !important;
+    transition: 0.5s;
+    border-left: 4px solid #46b450;
+}
+
+.moppm_overlay_not_JQ_error {
+    width: 450px;
+    height: min-content;
+    position: fixed;
+    float: right;
+    z-index: 100000;
+    top: 0;
+    right: 0;
+    margin-top: 7%;
+    background-color: bisque !important;
+    transition: 0.5s;
+    border-left: 4px solid red;
+}
+
 

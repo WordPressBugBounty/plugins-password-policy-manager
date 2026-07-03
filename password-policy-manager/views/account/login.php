@@ -20,7 +20,7 @@ echo '	<form name="f" method="post" action="">
 							<td><b><font color="#FF0000">*</font>Email:</b></td>
 							<td><input class="moppm_table_input_text" type="email" name="email"
 								required placeholder="person@example.com"
-								value="' . esc_attr( $admin_email ) . '" /></td>
+								value="' . esc_attr( $moppm_admin_email ) . '" /></td>
 						</tr>
 						<tr>
 							<td><b><font color="#FF0000">*</font>Password:</b></td>

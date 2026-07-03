@@ -26,9 +26,9 @@ $moppm_allowed_html = array(
 		<div class="moppm-2fa-info">
 			<div class="moppm-trynow-btn">
 			<?php
-			$plugin_name  = 'miniorange-2-factor-authentication';
-			$install_link = '<a href="' . esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . esc_html( $plugin_name ) . '&TB_iframe=true&width=800&height=600' ) ) . '" class="thickbox" title="More info about miniOrange\'s Two-Factor Authentication Plugin"><input type="button" class="button button-primary" value="Try Now"/></a>';
-			echo wp_kses( $install_link, $moppm_allowed_html );
+			$moppm_ad_plugin_slug  = 'miniorange-2-factor-authentication';
+			$moppm_ad_install_link = '<a href="' . esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . esc_html( $moppm_ad_plugin_slug ) . '&TB_iframe=true&width=800&height=600' ) ) . '" class="thickbox" title="More info about miniOrange\'s Two-Factor Authentication Plugin"><input type="button" class="button button-primary" value="Try Now"/></a>';
+			echo wp_kses( $moppm_ad_install_link, $moppm_allowed_html );
 			?>
 		</div>
 			<h1 class="moppm_h1_ad"><a href="https://wordpress.org/plugins/miniorange-2-factor-authentication/" target="_blank"><?php esc_html_e( 'miniOrange 2-factor Authentication (2FA with SMS, Email, Google Authenticator)', 'password-policy-manager' ); ?></a></h1>
