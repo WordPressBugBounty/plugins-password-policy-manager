@@ -1,13 +1,13 @@
-=== Password Policy Manager | Password Manager ===
+=== Password Policy Manager ===
 
 
 Contributors: miniOrange
 Tags:  Reset Password, Password Security, Strong password, Secure Password, Password strength
 Donate link: https://miniorange.com
-Requires at least: 4.6
-Tested up to: 7.0
+Requires at least: 5.3
+Tested up to: 7.1
 Requires PHP: 5.3.0
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: Expat
 License URI: https://plugins.miniorange.com/mit-license
 
@@ -156,6 +156,9 @@ If a user hasn't logged in yet, they will be prompted to change their password d
 
 
 == Changelog ==
+
+= 2.0.8 =
+* Compatibility with WordPress 7.1
 
 = 2.0.7 =
 

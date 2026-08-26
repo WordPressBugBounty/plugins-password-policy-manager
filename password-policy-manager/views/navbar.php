@@ -43,4 +43,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo '<a id="moppm_advertise" class="nav-tab ' . esc_attr(
 						( 'moppm_advertise' === $moppm_active_tab
 						? 'nav-tab-active' : '' )
-					) . '" href="' . esc_url( $moppm_advertise_url ) . '"><span class="dashicons dashicons-admin-plugins"></span>' . esc_html__( 'Other Plugins', 'password-policy-manager' ) . ' <sup>1</sup></a></div>';
+					) . '" href="' . esc_url( $moppm_advertise_url ) . '"><span class="dashicons dashicons-admin-plugins"></span>' . esc_html__( 'Other Plugins', 'password-policy-manager' ) . ' <sup>2</sup></a></div>';

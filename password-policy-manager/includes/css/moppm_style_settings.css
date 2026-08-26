@@ -283,8 +283,22 @@ input:focus + .mo_wpns_slider {
   margin-top: 20px;
   width: 100%;
 }
+.moppm-2fa-ad + .moppm-2fa-ad {
+  border-top: 1px solid #dcdcde;
+  padding-top: 20px;
+}
 .moppm-2fa-logo {
   background-image: url("https://ps.w.org/miniorange-2-factor-authentication/assets/icon-256x256.gif?rev=2421591");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 60px;
+  padding: 15px;
+  margin-right: 10px;
+}
+.moppm-otp-logo {
+  background-image: url("https://ps.w.org/miniorange-otp-verification/assets/icon-256x256.gif?rev=2669616");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
